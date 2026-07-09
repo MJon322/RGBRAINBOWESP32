@@ -1,0 +1,45 @@
+/*ESP 32 RGB light*/
+const int  PIN_RED =  18; /* Creates alias of the GPIO pins*/
+const int PIN_GREEN = 2;
+const int PIN_BLUE = 4;
+
+/*To hold the color that we change*/
+int red = 250;
+int green = 2;
+int blue = 50;
+
+int red_direction = -1;
+int green_direction = 1;
+int blue_direction = -1;
+
+/* Creating an helper function so it saves on the amount of times we
+loop*/
+
+void setColor(int R, int G, int B){ /*Parameters can be defined as anything
+as long as it ties to something we have defined*/
+analogWrite(PIN_RED, R);
+analogWrite(PIN_GREEN, G);
+analogWrite(PIN_BLUE, B);
+}
+void setup() {
+  //Set pin to outputs
+pinMode(PIN_RED,OUTPUT);
+pinMode(PIN_GREEN, OUTPUT);
+pinMode(PIN_BLUE, OUTPUT);
+}
+
+void loop() {
+ //Set color to REDM then loop through
+
+ red= red + red_direction;
+ green = green + green_direction;
+ blue = blue + blue_direction;
+
+ if (red >= 255 || red <=0) {red_direction = red_direction * -1;}
+ if (green >= 255 || green <= 0) { green_direction = green_direction * -1;}
+ if (blue >= 255 || blue <= 0) {blue_direction = blue_direction * -1;}
+setColor(red, blue, green);
+delay (5);
+
+
+}
